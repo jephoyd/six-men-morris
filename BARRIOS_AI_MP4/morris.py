@@ -273,7 +273,7 @@ def second_phase(mouse_x, mouse_y, curr_player):
                                 else:
                                     return values.GAMEPLAY_PLAYER_LOSE, curr_player
         
-                            if len(values.board_pieces_by_player[curr_player]) == 3 or len(values.board_pieces_by_player[opponent_player]) == 3:
+                            if len(values.board_pieces_by_player[curr_player]) == 3 and len(values.board_pieces_by_player[opponent_player]) == 3:
                                 pygame.time.wait(1000)  
 
                                 pygame.event.post(pygame.event.Event(pygame.MOUSEBUTTONDOWN, {'pos': (1000, 1)}))
@@ -323,8 +323,8 @@ def second_phase(mouse_x, mouse_y, curr_player):
                 else:
                     return values.GAMEPLAY_PLAYER_LOSE, curr_player
 
-            if len(values.board_pieces_by_player[curr_player]) == 3 or len(values.board_pieces_by_player[opponent_player]) == 3:
-                pygame.time.wait(1000)  
+            if len(values.board_pieces_by_player[curr_player]) == 3 and len(values.board_pieces_by_player[opponent_player]) == 3:
+                pygame.time.wait(700)  
 
                 pygame.event.post(pygame.event.Event(pygame.MOUSEBUTTONDOWN, {'pos': (1000, 1)}))
                 curr_player = values.player_ai if curr_player == values.player_human else values.player_human
@@ -655,7 +655,7 @@ def handle_game_end(curr_player):
     # Check if the game should move to the final phase or continue in the movement phase
     if values.held_pieces_by_player[curr_player] > 0:
         return switch_player_and_phase(curr_player, values.PLAYING_PHASE)
-    elif len(values.board_pieces_by_player[curr_player]) == 3 or len(values.board_pieces_by_player[opponent_player]) == 3:
+    elif len(values.board_pieces_by_player[curr_player]) == 3 and len(values.board_pieces_by_player[opponent_player]) == 3:
         return switch_player_and_phase(curr_player, values.GAMEPLAY_FINAL_PHASE)
     else:
         return switch_player_and_phase(curr_player, values.MOVEMENT_PHASE)
